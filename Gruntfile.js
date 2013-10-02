@@ -34,21 +34,19 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     remote_2_remote_rsync: {
-      default_options: {
+      single: {
         options: {
             src: "./test/fixtures/testing.txt",
             dest: "./test/faux-remote/",
         },
       },
-      /* custom_options: {
-              options: {
-                separator: ': ',
-                punctuation: ' !!!',
-              },
-              files: {
-                'tmp/custom_options': ['test/fixtures/testing', 'test/fixtures/123'],
-              },
-            }, */
+      multiple: {
+        options: {
+            src: "./test/fixtures/multiple/",
+            dest: "./test/faux-remote/multiple/",
+        },
+      },
+      
     },
 
     // Unit tests.
