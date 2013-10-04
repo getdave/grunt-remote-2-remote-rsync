@@ -52,7 +52,7 @@ module.exports = function(grunt) {
             "--progress",
         ],
         recursive: true,
-        syncDest: false  
+        syncDest: false
       },
       single: {
         options: {

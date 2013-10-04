@@ -19,7 +19,10 @@ var expect      = require('chai').expect;
 
 
 
+
 module.exports = function(grunt) {
+
+	var _ = grunt.util._;
 
 	var SHARED_OPTIONS = [],
 		tmp_dir;
@@ -35,21 +38,23 @@ module.exports = function(grunt) {
 		SHARED_OPTIONS = this.options();
 		tmp_dir = "./tmp/";
 
-		//grunt.task.run(['r2r_sync_remote_to_tmp', 'r2r_sync_tmp_to_remote']);
-		//
-		grunt.task.run(['r2r_sync_remote_to_tmp']);
+		grunt.task.run(['r2r_sync_remote_to_tmp', 'r2r_sync_tmp_to_remote']);
+		
+		
 	});
 
 
 	grunt.task.registerTask("r2r_sync_remote_to_tmp", "Pull remote 'src' to temp dir", function() {
 
+		var shared_options = _.clone(SHARED_OPTIONS,true);
 
-
-		var task_options = grunt.util._.extend(SHARED_OPTIONS, {
+		var task_options = _.extend(shared_options, {
 			dest: tmp_dir
 		});
 
-		grunt.log.subhead("rsyncing " + task_options.src + " >>> '/tmp/'." );
+		
+
+		grunt.log.subhead("rsyncing " + task_options.src + " >>> " + task_options.dest );
 
 
 
@@ -73,12 +78,13 @@ module.exports = function(grunt) {
 	grunt.task.registerTask("r2r_sync_tmp_to_remote", "Push '/tmp/' dir to remote 'dest'", function() {
 		var done = this.async();
 
+		var shared_options = _.clone(SHARED_OPTIONS,true);
 
-		var task_options = grunt.util._.extend(SHARED_OPTIONS,{
+		var task_options = _.extend(shared_options,{
 			src: tmp_dir
 		});
 
-		grunt.log.subhead("rsyncing '/tmp/' >>> " + task_options.dest + ".");
+		grunt.log.subhead("rsyncing " + task_options.src + " >>> " + task_options.dest);
 
 
 
