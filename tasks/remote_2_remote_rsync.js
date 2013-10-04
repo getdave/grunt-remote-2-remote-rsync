@@ -37,8 +37,8 @@ module.exports = function(grunt) {
     });
 
 
-    grunt.task.registerTask('r2r_sync_stage_to_tmp', 'Pull Stage to temp dir', function() {
-        grunt.log.subhead("rsyncing Stage to temporary local dir '/tmp/'.");
+    grunt.task.registerTask("r2r_sync_stage_to_tmp", "Pull remote 'src' to temp dir", function() {
+        grunt.log.subhead("rsyncing " + SHARED_OPTIONS.src + " >>> '/tmp/'." );
         var done = this.async();
         rsync({
             src: SHARED_OPTIONS.src,
@@ -59,15 +59,15 @@ module.exports = function(grunt) {
                 done(false);
             } else {
                 // success
-                grunt.log.ok("rsync from Stage successfully completed.");
+                grunt.log.ok("rsync from 'src' successfully completed.");
                 done(true);
             }
         });
     });
 
 
-    grunt.task.registerTask('r2r_sync_tmp_to_production', 'Push temp dir to Production', function() {
-        grunt.log.subhead("rsyncing local '/tmp/' dir to Production");
+    grunt.task.registerTask("r2r_sync_tmp_to_production", "Push '/tmp/' dir to remote 'dest'", function() {
+        grunt.log.subhead("rsyncing '/tmp/' >>> " + SHARED_OPTIONS.dest + ".");
         var done = this.async();
         rsync({
             src: "./tmp/",

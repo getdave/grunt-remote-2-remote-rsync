@@ -10,8 +10,23 @@
 
 module.exports = function(grunt) {
 
+
+  var secret = {};
+  try {
+    secret = grunt.file.readYAML('./test/secret.yaml');
+  } catch (err) {
+  }
+
+  console.log(secret);
+
+
   // Project configuration.
   grunt.initConfig({
+
+    // Capture on grunt init()
+    secret: secret,
+
+
     jshint: {
       all: [
         'Gruntfile.js',
@@ -34,6 +49,14 @@ module.exports = function(grunt) {
 
     // Configuration to be run (and then tested).
     remote_2_remote_rsync: {
+      options: {
+        args: [
+            "-avzh",
+            "--progress",
+        ],
+        recursive: true,
+        syncDest: false
+      },
       single: {
         options: {
             src: "./test/fixtures/testing.txt",
@@ -46,7 +69,12 @@ module.exports = function(grunt) {
             dest: "./test/faux-remote/multiple/",
         },
       },
-      
+      true_ssh: {
+        options: {
+          src:  "<%= secret.src.user %>" + "@" + "<%= secret.src.host %>" + ":" + "<%= secret.src.dir %>",
+          dest:  "<%= secret.dest.user %>" + "@" + "<%= secret.dest.host %>" + ":" + "<%= secret.dest.dir %>",
+        }
+      }      
     },
 
     // Unit tests.
