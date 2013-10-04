@@ -17,9 +17,6 @@ module.exports = function(grunt) {
   } catch (err) {
   }
 
-  console.log(secret);
-
-
   // Project configuration.
   grunt.initConfig({
 
@@ -55,7 +52,7 @@ module.exports = function(grunt) {
             "--progress",
         ],
         recursive: true,
-        syncDest: false
+        syncDest: false  
       },
       single: {
         options: {
@@ -74,7 +71,7 @@ module.exports = function(grunt) {
           src:  "<%= secret.src.user %>" + "@" + "<%= secret.src.host %>" + ":" + "<%= secret.src.dir %>",
           dest:  "<%= secret.dest.user %>" + "@" + "<%= secret.dest.host %>" + ":" + "<%= secret.dest.dir %>",
         }
-      }      
+      }
     },
 
     // Unit tests.
@@ -84,11 +81,11 @@ module.exports = function(grunt) {
             reporter: 'Nyan', // YES!!!!!
         },
 
-        all: { 
+        all: {
             src: [
               'node_modules/chai/lib/chai.js',
               'test/**/*.js'
-            ] 
+            ]
         }
     },
 
