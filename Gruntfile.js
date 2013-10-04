@@ -66,12 +66,12 @@ module.exports = function(grunt) {
             dest: "./test/faux-remote/multiple/",
         },
       },
-      true_ssh: {
-        options: {
-          src:  "<%= secret.src.user %>" + "@" + "<%= secret.src.host %>" + ":" + "<%= secret.src.dir %>",
-          dest:  "<%= secret.dest.user %>" + "@" + "<%= secret.dest.host %>" + ":" + "<%= secret.dest.dir %>",
-        }
-      }
+       true_ssh: {
+              options: {
+                src:  "<%= secret.src.user %>" + "@" + "<%= secret.src.host %>" + ":" + "<%= secret.src.dir %>",
+                dest:  "<%= secret.dest.user %>" + "@" + "<%= secret.dest.host %>" + ":" + "<%= secret.dest.dir %>",
+              }
+            } 
     },
 
     // Unit tests.
